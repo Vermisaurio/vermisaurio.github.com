@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="/manifest.json">
+    <style>
+      body {
+        margin: 0;
+      }
+      
+      #barraNoti {
+        width: 40px;
+        height: 40px;
+        background-image: url('http://panter.co/img/notiIcon.png');
+        background-size: 100%;
+        position: absolute;
+        right: 15px;
+        top: 9px;
+      }
+      
+      #barraNoti p {
+        background-color: #A3003B;
+        color: white;
+        font-family: arial;
+        border-radius: 5px;
+        text-align: center;
+        width: 25px;
+        position: absolute;
+        margin: 0;
+        right: -12px;
+        top: -7px;
+      }
+      
+      #contNoti {
+        width: 200px;
+        position: absolute;
+        right: 0;
+        top: 50px;
+      }
+      
+      #contNoti > div {
+        display: block;
+        width: 100%;
+      }
+      
+      #contNoti > div > p:first-child {
+        font-family: arial;
+        margin: 0;
+      }
+      
+      #contNoti > div > img {
+        display: inline-block;
+        width: 50px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 30px; height: 30px; background: red" id="cosa" onclick="llamar()"></div>
+    <div id="barraNoti">
+      <p id="numNoti">0</p>
+    </div>
+    <div id="contNoti"></div>
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+    <script src="js/push.min.js"></script>
+    <script src="js/push.fcm.js"></script>
+
+    <!-- Leave out Storage -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script> -->
+    <script>
+      var config = {
+        apiKey: "AIzaSyBn-weSesDp87hoRx3tNNSe-wSAS6pCk8Q",
+        authDomain: "panternoti.firebaseapp.com",
+        databaseURL: "https://panternoti.firebaseio.com",
+        projectId: "panternoti",
+        storageBucket: "panternoti.appspot.com",
+        messagingSenderId: "874069741020"
+      };
+      
+      Push.config({
+        FCM: config
+      });
+      
+      $( document ).ready( function() {
+      
+        Push.FCM().then(function(FCM) {
+            console.log("1");
+            FCM.getToken().then(function(token) {
+                console.log("Initialized with token " + token);
+            }).catch(function(tokenError) {
+               throw tokenError; 
+            });
+        }).catch(function(initError) {
+          console.log(initError);
+           throw initError; 
+        });
+        
+      } )
+      
+      
+    </script>
+  </body>
+</html>
