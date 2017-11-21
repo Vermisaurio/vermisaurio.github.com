@@ -11,7 +11,6 @@
       #barraNoti {
         width: 40px;
         height: 40px;
-        background-image: url('http://panter.co/img/notiIcon.png');
         background-size: 100%;
         position: absolute;
         right: 15px;
