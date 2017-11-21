@@ -1,37 +1,108 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="/manifest.json">
+    <style>
+      body {
+        margin: 0;
+      }
+      
+      #barraNoti {
+        width: 40px;
+        height: 40px;
+        background-image: url('http://panter.co/img/notiIcon.png');
+        background-size: 100%;
+        position: absolute;
+        right: 15px;
+        top: 9px;
+      }
+      
+      #barraNoti p {
+        background-color: #A3003B;
+        color: white;
+        font-family: arial;
+        border-radius: 5px;
+        text-align: center;
+        width: 25px;
+        position: absolute;
+        margin: 0;
+        right: -12px;
+        top: -7px;
+      }
+      
+      #contNoti {
+        width: 200px;
+        position: absolute;
+        right: 0;
+        top: 50px;
+      }
+      
+      #contNoti > div {
+        display: block;
+        width: 100%;
+      }
+      
+      #contNoti > div > p:first-child {
+        font-family: arial;
+        margin: 0;
+      }
+      
+      #contNoti > div > img {
+        display: inline-block;
+        width: 50px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 30px; height: 30px; background: red" id="cosa" onclick="llamar()"></div>
+    <div id="barraNoti">
+      <p id="numNoti">0</p>
+    </div>
+    <div id="contNoti"></div>
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+    <script src="js/push.min.js"></script>
+    <script src="js/push.fcm.js"></script>
 
-You can use the [editor on GitHub](https://github.com/Vermisaurio/vermisaurio.github.com/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Vermisaurio/vermisaurio.github.com/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+    <!-- Leave out Storage -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-storage.js"></script> -->
+    <script>
+      var config = {
+        apiKey: "AIzaSyBn-weSesDp87hoRx3tNNSe-wSAS6pCk8Q",
+        authDomain: "panternoti.firebaseapp.com",
+        databaseURL: "https://panternoti.firebaseio.com",
+        projectId: "panternoti",
+        storageBucket: "panternoti.appspot.com",
+        messagingSenderId: "874069741020"
+      };
+      
+      Push.config({
+        FCM: config
+      });
+      
+      $( document ).ready( function() {
+      
+        Push.FCM().then(function(FCM) {
+            console.log("1");
+            FCM.getToken().then(function(token) {
+                console.log("Initialized with token " + token);
+            }).catch(function(tokenError) {
+               throw tokenError; 
+            });
+        }).catch(function(initError) {
+          console.log(initError);
+           throw initError; 
+        });
+        
+      } )
+      
+      
+    </script>
+  </body>
+</html>
